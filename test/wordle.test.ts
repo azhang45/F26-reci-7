@@ -20,6 +20,7 @@ const wordFrom = (letters: string) =>
 const word = wordFrom(ALPHABET);
 
 describe('matchGuess', () => {
+  // Pattern: invariant. the result has always five colors.
   it('returns exactly five colors', () => {
     fc.assert(
       fc.property(word, word, (secret,guess) =>{
@@ -28,6 +29,7 @@ describe('matchGuess', () => {
     );
   });
   it('only uses the colors G, Y, B', () => {
+    // Pattern: invariant. every color is G, Y, or B.
     fc.assert(
       fc.property(word,word,(secret,guess) => {
         for (const c of matchGuess(secret, guess)) expect(['G', 'Y', 'B']).toContain(c);
@@ -35,6 +37,7 @@ describe('matchGuess', () => {
     )
   });
   it('guessing the secret gives all greens', () => {
+    // Pattern: conditional. if the guess is the secret, every color is green.
     fc.assert(
       fc.property(word, w => {
         expect(matchGuess(w,w)).toEqual(['G','G','G','G','G']);
@@ -42,6 +45,7 @@ describe('matchGuess', () => {
     );
   });
   it('never credits a letter more times than the secret contains it', () => {
+    // Pattern: invariant: No letter is credited (G or Y) more times than the secret contains it.
     fc.assert(
       fc.property(word, word, (secret,guess) => {
         const result = matchGuess(secret, guess);
