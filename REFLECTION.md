@@ -1,8 +1,10 @@
 # Reflection
 
 **Name / Andrew ID:**
+Alice Zhang / alicez2
 
 **Recitation group members (Task 2):**
+Coral Zhu
 
 ---
 
